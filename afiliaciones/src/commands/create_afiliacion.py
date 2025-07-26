@@ -9,26 +9,25 @@ class CreateAfiliacion(BaseCommand):
     def execute(self, afiliacion_obj):
         # afiliacion_obj es el objeto mapeado según el schema
         afiliacion = Afiliacion(
-            estado_solicitud=afiliacion_obj.estado_solicitud,
-            comentario=afiliacion_obj.comentario,
-            estado=afiliacion_obj.estado
+            comentario=afiliacion_obj.get('comentario', None),
+            estado=afiliacion_obj.get('estado', None)
         )
         db.session.add(afiliacion)
         db.session.flush()
 
-        usuario_obj = getattr(afiliacion_obj, 'usuario', None)
+        usuario_obj = afiliacion_obj.get('usuario', None)
         if usuario_obj:
             usuario_temp = UsuarioTemp(
-                documento_id=usuario_obj.documento_id,
-                tipo_documento_id=usuario_obj.tipo_documento_id,
-                nombre=usuario_obj.nombre,
-                apellido=usuario_obj.apellido,
-                direccion=usuario_obj.direccion,
-                correo_personal=usuario_obj.correo_personal,
-                genero=usuario_obj.genero,
-                telefono1=usuario_obj.telefono1,
-                telefono2=usuario_obj.telefono2,
-                datos_adicionales=getattr(usuario_obj, 'datos_adicionales', None),
+                documento_id=usuario_obj.get('documento_id', None),
+                tipo_documento_id=usuario_obj.get('tipo_documento_id', None),
+                nombre=usuario_obj.get('nombre', None),
+                apellido=usuario_obj.get('apellido', None),
+                direccion=usuario_obj.get('direccion', None),
+                correo_personal=usuario_obj.get('correo_personal', None),
+                genero=usuario_obj.get('genero', None),
+                telefono1=usuario_obj.get('telefono1', None),
+                telefono2=usuario_obj.get('telefono2', None),
+                datos_adicionales=usuario_obj.get('datos_adicionales', None),
                 id_afiliacion=afiliacion.id
             )
             db.session.add(usuario_temp)

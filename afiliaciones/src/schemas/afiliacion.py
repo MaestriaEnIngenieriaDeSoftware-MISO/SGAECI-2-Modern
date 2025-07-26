@@ -14,7 +14,7 @@ class UsuarioTempRequestSchema(Schema):
 
 class AfiliacionRequestSchema(Schema):
     estado_solicitud = fields.Str()
-    comentario = fields.Str(required=True)
+    comentario = fields.Str()
     estado = fields.Str()
     usuario = fields.Nested(UsuarioTempRequestSchema, required=True)
 
