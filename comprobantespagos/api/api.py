@@ -4,6 +4,7 @@ from flask import (Blueprint, flash)
 from comprobantespagos.aplicacion.comandos.registrar_comprobante import RegistrarComprobante, ejecutar_comando_registrar_comprobante
 from comprobantespagos.aplicacion.comandos.actualizar_afiliacion import ActualizarAfiliacion, ejecutar_comando_actualizar_afiliacion
 from comprobantespagos.aplicacion.queries.consultar_afiliacion import ejecutar_query_consultar_afiliacion, ConsultarAfiliacion
+from comprobantespagos.dominio.constants import ERROR_GENERAL
 #g, redirect, render_template, request, session, url_for)
 ##from saludtechalpes.seedwork.aplicacion.queries import ejecutar_query
 ##from saludtechalpes.modulos.imagenes.aplicacion.queries.obtener_imagenes_medicas import ObtenerImagenes
@@ -25,5 +26,6 @@ def registrar_comprobante():
         ejecutar_comando_actualizar_afiliacion(comandoActualizarAfiliacion)
         queryConsultarAfiliacion = ConsultarAfiliacion("123123")
         ejecutar_query_consultar_afiliacion(queryConsultarAfiliacion)
-    except:
-    return "", 200
+        return "", 200
+    except Exception:
+        return { "msg": ERROR_GENERAL }, 500

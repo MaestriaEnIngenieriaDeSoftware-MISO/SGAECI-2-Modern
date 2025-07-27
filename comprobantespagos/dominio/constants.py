@@ -1,0 +1,1 @@
+ERROR_GENERAL = "Ha ocurrido un error."
