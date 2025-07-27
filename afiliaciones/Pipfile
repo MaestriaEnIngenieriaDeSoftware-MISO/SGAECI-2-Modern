@@ -9,9 +9,10 @@ flask-sqlalchemy = "*"
 psycopg2-binary = "*"
 marshmallow = "*"
 python-dotenv = "*"
+werkzeug = "*"
+markupsafe = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.11"
-python_full_version = "3.11.6"
