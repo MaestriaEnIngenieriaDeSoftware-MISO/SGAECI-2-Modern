@@ -34,7 +34,7 @@ def registrar_comprobante():
         #ejecutar_comando_actualizar_afiliacion(comandoActualizarAfiliacion)
         #queryConsultarAfiliacion = ConsultarAfiliacion(comprobante["afiliacion_id"])
         #ejecutar_query_consultar_afiliacion(queryConsultarAfiliacion)
-        return VALIDACION_COMPROBANTE_EXITOSA, 200
+        return {"msg": VALIDACION_COMPROBANTE_EXITOSA}, 200
    except FechaDePagoDebeEstarEnFuturo:
         return { "msg": "Fecha no puede estar en el futuro" }, 500
    except requests.exceptions.HTTPError as HTTPError:
