@@ -1,0 +1,78 @@
+version: "3.8"
+services:
+  comprobantespagos:
+    build: ./comprobantespagos
+    ports:
+      - "3001:3001"
+    environment:
+      DB_NAME: comprobantespagos_db
+      DB_HOST: comprobantespagos_db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      ##TRUE_NATIVE_PATH: http://true_native:3000
+      ##SECRET_TOKEN: qwerty
+      ##GCP_PROJECT_ID: s202414-proyecto-grupo12
+      ##EMAIL_PUBSUB_TOPIC: send-email-topic
+      ##USER_WEBHOOK_URL: https://us-central1-s202414-proyecto-grupo12.cloudfunctions.net/user_webhook
+    #depends_on:
+    #  users_db:
+    #    condition: service_healthy
+    networks:
+      - app_net
+      - comprobantespagos_net
+  afiliaciones:
+    build: ./afiliaciones
+    ports:
+      - "3002:3002"
+    environment:
+      DB_NAME: afiliaciones_db
+      DB_HOST: afiliaciones_db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      # USERS_PATH: http://afiliaciones:3002
+      # ENVIROMENT: .env.development
+    #depends_on:
+    #  posts_db:
+    #    condition: service_healthy
+    networks:
+      - afiliaciones_net
+      - app_net
+  comprobantespagos_db:
+    image: postgres
+    volumes:
+      - comprobantespagos_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: comprobantespagos_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+    networks:
+      - comprobantespagos_net
+  afiliaciones_db:
+    image: postgres
+    volumes:
+      - afiliaciones_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: afiliaciones_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+    networks:
+      - afiliaciones_net
+networks:
+  app_net:
+  comprobantespagos_net:
+  afiliaciones_net:
+volumes:
+  comprobantespagos_data:
+  afiliaciones_data:
