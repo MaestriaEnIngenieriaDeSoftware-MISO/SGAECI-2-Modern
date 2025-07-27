@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "7c4298b3-44c1-479b-8ac8-3187ee3f8aa6",
+		"name": "SGAECI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37615949"
+	},
+	"item": [
+		{
+			"name": "Afiliaciones",
+			"item": [
+				{
+					"name": "Health check",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/afiliaciones/health",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"afiliaciones",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset database",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/afiliaciones/reset",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"afiliaciones",
+								"reset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Afiliacion",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"usuario\": {\n    \"documento_id\": 12345678,\n    \"tipo_documento_id\": \"CC\",\n    \"nombre\": \"Juan\",\n    \"apellido\": \"Pérez\",\n    \"direccion\": \"Calle 123 #45-67\",\n    \"correo_personal\": \"juan.perez@email.com\",\n    \"genero\": \"M\",\n    \"telefono1\": \"3001234567\",\n    \"telefono2\": \"6012345678\",\n    \"datos_adicionales\": {\n      \"carrera\": \"Ingeniería de Sistemas\",\n      \"semestreGrado\": \"2025-1\",\n      \"correoEstudiantil\": \"jperez@uni.edu.co\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{afiliaciones_url}}/afiliaciones",
+							"host": [
+								"{{afiliaciones_url}}"
+							],
+							"path": [
+								"afiliaciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Afiliacion",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"usuario\": {\n    \"documento_id\": 12345678,\n    \"tipo_documento_id\": \"CC\",\n    \"nombre\": \"Juan\",\n    \"apellido\": \"Pérez\",\n    \"direccion\": \"Calle 123 #45-67\",\n    \"correo_personal\": \"juan.perez@email.com\",\n    \"genero\": \"M\",\n    \"telefono1\": \"3001234567\",\n    \"telefono2\": \"6012345678\",\n    \"datos_adicionales\": {\n      \"carrera\": \"Ingeniería de Sistemas\",\n      \"semestreGrado\": \"2025-1\",\n      \"correoEstudiantil\": \"jperez@uni.edu.co\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{afiliaciones_url}}/afiliaciones/4",
+							"host": [
+								"{{afiliaciones_url}}"
+							],
+							"path": [
+								"afiliaciones",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ComprobantesDePagos",
+			"item": [
+				{
+					"name": "Registrar Comprobante de Pagos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pago_id\" : \"0001\",\n    \"valor\" : \"9000\",\n    \"documento_id\" : \"18888234234\",\n    \"fecha_registro\" : \"2025-07-27T10:45:32.123Z\",\n    \"fecha_pago\" : \"2025-07-27T10:45:32.123Z\",\n    \"egresado\" : \"asdasd\",\n    \"tipo\" : \"aaa\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{comprobantespagos_url}}/comprobantes-pagos",
+							"host": [
+								"{{comprobantespagos_url}}"
+							],
+							"path": [
+								"comprobantes-pagos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "afiliaciones_url",
+			"value": "http://127.0.0.1:3000",
+			"type": "string"
+		},
+		{
+			"key": "comprobantespagos_url",
+			"value": "http://127.0.0.1:3001",
+			"type": "string"
+		}
+	]
+}

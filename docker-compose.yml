@@ -24,7 +24,7 @@ services:
   afiliaciones:
     build: ./afiliaciones
     ports:
-      - "3002:3002"
+      - "3000:3000"
     environment:
       DB_NAME: afiliaciones_db
       DB_HOST: afiliaciones_db
