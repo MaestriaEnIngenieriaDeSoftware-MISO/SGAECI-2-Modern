@@ -8,4 +8,9 @@ services:
     volumes:
       - ./instance:/app/instance
     restart: unless-stopped
-
+  redis:
+    image: redis:7.2
+    container_name: afiliaciones_redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped

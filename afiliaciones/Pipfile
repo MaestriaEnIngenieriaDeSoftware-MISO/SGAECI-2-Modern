@@ -11,6 +11,8 @@ marshmallow = "*"
 python-dotenv = "*"
 werkzeug = "*"
 markupsafe = "*"
+redis = "*"
+rq = "*"
 
 [dev-packages]
 
