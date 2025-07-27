@@ -22,3 +22,11 @@ class AfiliacionResponseSchema(Schema):
     msg = fields.Str()
     id = fields.Int()
 
+class AfiliacionUpdateSchema(Schema):
+    estado_solicitud = fields.Str()
+    comentario = fields.Str()
+    estado = fields.Str()
+
+class AfiliacionConsultaSchema(Schema):
+    estado_solicitud = fields.Str()
+    estado = fields.Str()
