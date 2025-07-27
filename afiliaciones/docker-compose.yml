@@ -8,6 +8,8 @@ services:
     volumes:
       - ./instance:/app/instance
     restart: unless-stopped
+    env_file:
+      - .env.development
   redis:
     image: redis:7.2
     container_name: afiliaciones_redis
