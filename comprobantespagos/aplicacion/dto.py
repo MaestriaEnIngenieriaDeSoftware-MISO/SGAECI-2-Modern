@@ -3,6 +3,7 @@ from dataclasses import dataclass, field
 
 class PagoAfiliacionDTO(Schema):
     id = fields.String(required=False)
+    afiliacion_id = fields.String(required=True)
     pago_id = fields.String(required=False)
     valor = fields.String(required=True)
     documento_id = fields.String(required=True)

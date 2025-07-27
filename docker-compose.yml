@@ -10,6 +10,7 @@ services:
       DB_PORT: 5432
       DB_USER: postgres
       DB_PASSWORD: postgres
+      AFILIACIONES_URL: http://afiliaciones:3000
       ##TRUE_NATIVE_PATH: http://true_native:3000
       ##SECRET_TOKEN: qwerty
       ##GCP_PROJECT_ID: s202414-proyecto-grupo12
