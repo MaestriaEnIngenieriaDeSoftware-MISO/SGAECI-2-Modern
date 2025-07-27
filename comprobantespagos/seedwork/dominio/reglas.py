@@ -1,10 +1,9 @@
-"""Reglas de negocio reusables parte del seedwork del proyecto
-
-En este archivo usted encontrará reglas de negocio reusables parte del seedwork del proyecto
-
-"""
-
 from abc import ABC, abstractmethod
+from datetime import datetime
+from .excepciones import FechaDePagoDebeEstarEnFuturo
+import pytz
+
+utc=pytz.UTC
 
 class ReglaNegocio(ABC):
 
@@ -24,17 +23,19 @@ class ReglaNegocio(ABC):
         return f"{self.__class__.__name__} - {self.__mensaje}"
 
 
-class IdEntidadEsInmutable(ReglaNegocio):
+class FechaDePagoEsInalido(ReglaNegocio):
 
     entidad: object
 
-    def __init__(self, entidad, mensaje='El identificador de la entidad debe ser Inmutable'):
+    def __init__(self, entidad, mensaje='El pago de la afiliacion no puede realizarse despues del día de hoy'):
         super().__init__(mensaje)
         self.entidad = entidad
 
     def es_valido(self) -> bool:
         try:
-            if self.entidad._id:
-                return False
+            fecha_pago = self.entidad["fecha_pago"]
+            current_date = utc.localize(datetime.now())
+            if (fecha_pago > current_date):
+                 raise FechaDePagoDebeEstarEnFuturo()
         except AttributeError as error:
             return True

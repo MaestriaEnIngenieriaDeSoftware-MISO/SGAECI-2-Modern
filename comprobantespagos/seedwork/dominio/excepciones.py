@@ -1,10 +1,11 @@
-from .reglas import ReglaNegocio
+# from .reglas import ReglaNegocio
 
 class ExcepcionDominio(Exception):
     ...
 
-class ErrorGeneralExcepcion(ExcepcionDominio):
-    def __init__(self, mensaje=''):
-        self.__mensaje = mensaje
+class FechaDePagoDebeEstarEnFuturo(ExcepcionDominio):
+    def __init__(self, mensaje = ""):
+        self.mensaje = mensaje
+
     def __str__(self):
-        return str(self.__mensaje)
+        return str(self.mensaje)
