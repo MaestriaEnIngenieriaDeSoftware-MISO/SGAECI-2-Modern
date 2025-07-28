@@ -11,4 +11,3 @@ class PagoAfiliacionDTO(Schema):
     fecha_pago = fields.DateTime(format="iso", required=True)
     egresado = fields.String(required=False)
     tipo= fields.String(required=False)
-    ### img:bytearray= field(default=None) 

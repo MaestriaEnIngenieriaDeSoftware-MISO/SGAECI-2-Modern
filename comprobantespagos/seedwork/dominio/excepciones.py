@@ -1,5 +1,3 @@
-# from .reglas import ReglaNegocio
-
 class ExcepcionDominio(Exception):
     ...
 
