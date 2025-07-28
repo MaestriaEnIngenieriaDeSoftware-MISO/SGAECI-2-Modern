@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from dotenv import load_dotenv
 import os
 import logging
+import threading
 
 from src.blueprints.afiliaciones import afiliaciones_blueprint
 from .blueprints.health_check import health_check_blueprint
@@ -9,6 +10,7 @@ from .database import init_db
 from marshmallow import ValidationError
 from werkzeug.exceptions import HTTPException
 from .errors.errors import ApiError
+from src.consumers.afiliaciones_consumer import main as afiliaciones_consumer_main
 
 # Cargar variables de entorno
 load_dotenv()
@@ -21,6 +23,10 @@ app = Flask(__name__)
 init_db(app)
 app.register_blueprint(health_check_blueprint)
 app.register_blueprint(afiliaciones_blueprint)
+
+# Lanzar el hilo del consumer siempre, sin importar cómo se ejecute la app
+consumer_thread = threading.Thread(target=afiliaciones_consumer_main, args=(app,), daemon=True)
+consumer_thread.start()
 
 
 @app.errorhandler(Exception)
