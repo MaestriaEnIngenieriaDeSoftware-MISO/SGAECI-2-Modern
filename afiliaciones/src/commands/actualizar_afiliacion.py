@@ -1,8 +1,8 @@
-from src.queries.base_query import BaseQuery
+from src.commands.base_command import BaseCommand
 from src.models.afiliacion import Afiliacion
 from src import database
 
-class ActualizarAfiliacion(BaseQuery):
+class ActualizarAfiliacion(BaseCommand):
     def execute(self, afiliacion_id, data):
         afiliacion = Afiliacion.query.get(afiliacion_id)
         if not afiliacion:

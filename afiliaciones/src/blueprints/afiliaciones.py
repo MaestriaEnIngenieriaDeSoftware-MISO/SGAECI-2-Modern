@@ -1,14 +1,11 @@
 from flask import Blueprint, jsonify, request
-import logging
 
 from src.commands.reset_database import ResetDatabase
 from src.commands.create_afiliacion import CreateAfiliacion
 from src.schemas.afiliacion import AfiliacionRequestSchema, AfiliacionUpdateSchema, AfiliacionConsultaSchema
 from src.utils.mapeadores import map_externo_to_dto
-from src.models.afiliacion import Afiliacion
-from src import database
 from src.queries.consulta_afiliacion import ConsultaAfiliacion
-from src.queries.actualizar_afiliacion import ActualizarAfiliacion
+from src.commands.actualizar_afiliacion import ActualizarAfiliacion
 
 afiliaciones_blueprint = Blueprint('afiliaciones', __name__, url_prefix='/afiliaciones')
 
