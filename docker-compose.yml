@@ -11,13 +11,16 @@ services:
       DB_USER: postgres
       DB_PASSWORD: postgres
       AFILIACIONES_URL: http://afiliaciones:3000
+      REDIS_HOST: "redis"
+      REDIS_PORT: "6379"
+      REDIS_QUEUE: "afiliaciones_update_queue"
       ##TRUE_NATIVE_PATH: http://true_native:3000
       ##SECRET_TOKEN: qwerty
       ##GCP_PROJECT_ID: s202414-proyecto-grupo12
       ##EMAIL_PUBSUB_TOPIC: send-email-topic
       ##USER_WEBHOOK_URL: https://us-central1-s202414-proyecto-grupo12.cloudfunctions.net/user_webhook
     #depends_on:
-    #  users_db:
+    #  redis:
     #    condition: service_healthy
     networks:
       - app_net
@@ -70,6 +73,14 @@ services:
       retries: 5
     networks:
       - afiliaciones_net
+  redis:
+    image: redis:7.2
+    container_name: afiliaciones_redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - app_net
 networks:
   app_net:
   comprobantespagos_net:
